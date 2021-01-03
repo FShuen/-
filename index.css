@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Noto+Serif+TC:wght@500&display=swap');
+body{
+    margin: 0;
+    background-color: #F3F3F3;
+    overflow-x:hidden;
+}
+
+.title{
+    font-size: 50px;
+    font-weight: 500;
+    font-family: 'Noto Serif TC',serif;
+}
+#indexcontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 66vh;
+}
+
+.button{
+    background-color: hsl(30,100%,50%);
+    padding: 0.5em 1em;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    border-radius: 0.2em;
+    color: darkslategray;
+    font-family: 'Fjalla One' ,serif;
+    font-size: 1.5em;
+    margin-left: 2em;
+}
+.button:hover{
+    background-color: hsl(30,100%,40%);
+}
+
+.button:first-child{
+    margin-left: 0;
+}
+.button.single:hover > ul{
+    display: block;
+}

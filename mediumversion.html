@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="utf-8">
+    <title>黑白棋</title>
+    <meta name="keywords" content="homepage">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="final.css">
+</head>
+    
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <div id="container"> 
+        <div id="turn">YOUR TURN!</div>
+        <div id="choose">請選擇先、後手!</div>
+
+        <div class="grade bgrade">2</div>
+        <div class="grade wgrade">2</div>
+        <div class="title bgrade">黑棋</div>
+        <div class="title wgrade">白棋</div>
+        <button type="button" onclick="whitefirst();" class="btn bwhite">後手</button>
+        <button type="button" onclick="blackfirst();" class="btn bblack">先手</button>
+        <button type="button" onclick="reload();" class="btn reload">New Game</button>
+        <div class="banner"></div>
+    </div>
+    <script type="text/javascript" src="mediumversion.js"></script>
+</body>
+    
+</html>
