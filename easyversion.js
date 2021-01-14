@@ -51,6 +51,23 @@ value[4][4] = 1;
 value[3][4] = 2;
 value[4][3] = 2;
 
+//電腦戰績(localstorage)
+var wins = JSON.parse(localStorage.getItem('win'));
+var loses = JSON.parse(localStorage.getItem('lose'));
+var ties = JSON.parse(localStorage.getItem('tie'));
+if(wins == null){
+    wins = 0;
+}
+if(loses == null){
+    loses = 0;
+}
+if(ties == null){
+    ties = 0;
+}
+let p= wins/(loses+ties+wins)*100.0;
+p = Math.round(p * 100) / 100;
+$('.AIgrade').html('電腦戰績:'+wins+'勝'+loses+'負'+ties+'和&nbsp;&nbsp;勝率:'+p+'%');
+
 //黑棋(玩家)要先下
 function blackfirst() {
     blackActive();
@@ -646,7 +663,7 @@ function count() {
     }, 50);
 }
 
-//遊戲結算
+//結算遊戲
 function endgame() {
     let total_white = 0;
     let total_black = 0;
@@ -659,18 +676,34 @@ function endgame() {
             }
         }
     }
-    console.log('total_black: ' + total_black);
-    console.log('total_white: ' + total_white);
+
     if (total_black > total_white) {
+        loses += 1;
+        update(wins,loses,ties);
         $('.banner').text('YOU  WIN!');
         $('.banner').fadeIn("slow");
     } else if (total_black < total_white) {
+        wins += 1;
+        update(wins,loses,ties);
         $('.banner').text('YOU LOSE!');
         $('.banner').fadeIn("slow");
     } else {
+        ties += 1;
+        update(wins,loses,ties);
         $('.banner').text('   TIE   ');
         $('.banner').fadeIn("slow");
     }
+}
+
+//update
+function update(wins,loses,ties){
+    localStorage.clear();
+    localStorage.setItem('win', JSON.stringify(wins));
+    localStorage.setItem('lose', JSON.stringify(loses));
+    localStorage.setItem('tie', JSON.stringify(ties));
+    let p= wins/(loses+ties+wins)*100.0;
+    p = Math.round(p * 100) / 100;
+    $('.AIgrade').html('電腦戰績:'+wins+'勝'+loses+'負'+ties+'和&nbsp;&nbsp;勝率:'+p+'%');
 }
 
 //new Game

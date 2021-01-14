@@ -31,6 +31,7 @@ body{
 .btn.reload{
     position: absolute;
     left: -245px;
+    top : 290px;
     font-family: 'Fjalla One' ,serif;
 }
 .btn{
@@ -40,7 +41,7 @@ body{
 .title{
     font-size: 28px;
     position: absolute;
-    top:31.5px;
+    top:121.5px;
     height: 35px;
     width: 70px;
     text-align: center;
@@ -57,7 +58,7 @@ body{
     font-size: 14px;
     border: lightgray solid 3.5px;
     border-radius: 5%;
-    top: 70px;
+    top: 160px;
     font-size: 42px;
     line-height: 56px;
     text-align: center;
@@ -71,6 +72,19 @@ body{
 .grade.wgrade{
     position: absolute;
     left: -273px;
+}
+.AIgrade{
+    font-size: 20px;
+    position: absolute;
+    top:-35px;
+    left: -350px;
+    height: 35px;
+    width: auto;
+    padding: 5px;
+    text-align: center;
+    font-family: 'Noto Serif TC', serif;
+    border: lightgray 3px solid;
+    border-radius: 5%;
 }
 #container{
     background-color: black;
