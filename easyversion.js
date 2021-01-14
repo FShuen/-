@@ -55,10 +55,18 @@ value[4][3] = 2;
 var wins = JSON.parse(localStorage.getItem('easywin'));
 var loses = JSON.parse(localStorage.getItem('easylose'));
 var ties = JSON.parse(localStorage.getItem('easytie'));
-if(wins == null)wins = 0;
-if(loses == null)loses = 0;
-if(ties == null)ties = 0;
-
+if(wins == null){
+    wins = 0;
+    localStorage.setItem('easywin', JSON.stringify(wins));
+}
+if(loses == null){
+    loses = 0;
+    localStorage.setItem('easylose', JSON.stringify(loses));   
+}
+if(ties == null){
+    ties = 0;
+    localStorage.setItem('easytie', JSON.stringify(ties));
+}
 let p;
 if(wins+loses+ties == 0) p = 0;
 else p = wins/(loses+ties+wins)*100.0;
@@ -700,7 +708,6 @@ function endgame() {
 
 //update
 function update(wins,loses,ties){
-    localStorage.clear();
     localStorage.setItem('easywin', JSON.stringify(wins));
     localStorage.setItem('easylose', JSON.stringify(loses));
     localStorage.setItem('easytie', JSON.stringify(ties));

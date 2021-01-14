@@ -55,9 +55,18 @@ value[4][3] = 2;
 var wins = JSON.parse(localStorage.getItem('mediumwin'));
 var loses = JSON.parse(localStorage.getItem('mediumlose'));
 var ties = JSON.parse(localStorage.getItem('mediumtie'));
-if(wins == null)wins = 0;
-if(loses == null)loses = 0;
-if(ties == null)ties = 0;
+if(wins == null){
+    wins = 0;
+    localStorage.setItem('mediumwin', JSON.stringify(wins));
+}
+if(loses == null){
+    loses = 0;
+    localStorage.setItem('mediumlose', JSON.stringify(loses));   
+}
+if(ties == null){
+    ties = 0;
+    localStorage.setItem('mediumtie', JSON.stringify(ties));
+}
 
 let p;
 if(wins+loses+ties == 0) p = 0;
@@ -797,7 +806,6 @@ function endgame() {
 
 //update
 function update(wins,loses,ties){
-    localStorage.clear();
     localStorage.setItem('mediumwin', JSON.stringify(wins));
     localStorage.setItem('mediumlose', JSON.stringify(loses));
     localStorage.setItem('mediumtie', JSON.stringify(ties));
