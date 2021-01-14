@@ -52,21 +52,24 @@ value[3][4] = 2;
 value[4][3] = 2;
 
 //電腦戰績(localstorage)
-var wins = JSON.parse(localStorage.getItem('win'));
-var loses = JSON.parse(localStorage.getItem('lose'));
-var ties = JSON.parse(localStorage.getItem('tie'));
-if(wins == null){
-    wins = 0;
-}
-if(loses == null){
-    loses = 0;
-}
-if(ties == null){
-    ties = 0;
-}
-let p= wins/(loses+ties+wins)*100.0;
+var wins = JSON.parse(localStorage.getItem('easywin'));
+var loses = JSON.parse(localStorage.getItem('easylose'));
+var ties = JSON.parse(localStorage.getItem('easytie'));
+if(wins == null)wins = 0;
+if(loses == null)loses = 0;
+if(ties == null)ties = 0;
+
+let p;
+if(wins+loses+ties == 0) p = 0;
+else p = wins/(loses+ties+wins)*100.0;
 p = Math.round(p * 100) / 100;
 $('.AIgrade').html('電腦戰績:'+wins+'勝'+loses+'負'+ties+'和&nbsp;&nbsp;勝率:'+p+'%');
+
+//防止別人直接從localstorage修改勝敗場
+window.addEventListener('storage', (e) => {
+    console.log('還敢亂調阿');
+    localStorage.setItem(e.key, e.oldValue)
+})
 
 //黑棋(玩家)要先下
 function blackfirst() {
@@ -698,9 +701,9 @@ function endgame() {
 //update
 function update(wins,loses,ties){
     localStorage.clear();
-    localStorage.setItem('win', JSON.stringify(wins));
-    localStorage.setItem('lose', JSON.stringify(loses));
-    localStorage.setItem('tie', JSON.stringify(ties));
+    localStorage.setItem('easywin', JSON.stringify(wins));
+    localStorage.setItem('easylose', JSON.stringify(loses));
+    localStorage.setItem('easytie', JSON.stringify(ties));
     let p= wins/(loses+ties+wins)*100.0;
     p = Math.round(p * 100) / 100;
     $('.AIgrade').html('電腦戰績:'+wins+'勝'+loses+'負'+ties+'和&nbsp;&nbsp;勝率:'+p+'%');
