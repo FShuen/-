@@ -79,16 +79,16 @@ if(ties == null){
     localStorage.setItem('hardtie', JSON.stringify(ties));
 }
 let p;
-if(wins+loses+ties == 0) p = 0;
+if(wins+loses+ties == 0) p = 0; //防出現0/0的情況
 else p = wins/(loses+ties+wins)*100.0;
 p = Math.round(p * 100) / 100;
 $('.AIgrade').html('電腦戰績:'+wins+'勝'+loses+'負'+ties+'和&nbsp;&nbsp;勝率:'+p+'%');
 
-////防止別人直接從localstorage修改勝敗場
-//window.addEventListener('storage', (e) => {
-//    console.log('還敢亂調阿');
-//    localStorage.setItem(e.key, e.oldValue)
-//})
+//防止別人直接從localstorage修改勝敗場
+window.addEventListener('storage', (e) => {
+    console.log('還敢亂調阿');
+    localStorage.setItem(e.key, e.oldValue)
+})
 
 //黑棋(玩家)要先下
 function blackfirst() {
@@ -96,6 +96,9 @@ function blackfirst() {
     $('.btn.bblack').hide();
     $('.btn.bwhite').hide();
     $('#choose').hide();
+    
+    $('.btn.reload').hide();
+    $('.btn.surrender').show();
 }
 
 //白棋(電腦)要先下
@@ -104,6 +107,9 @@ function whitefirst() {
     $('.btn.bblack').hide();
     $('.btn.bwhite').hide();
     $('#choose').hide();
+    
+    $('.btn.reload').hide();
+    $('.btn.surrender').show();
 }
 //initial end
 
@@ -1102,23 +1108,26 @@ function endgame() {
             }
         }
     }
-    
-    if (total_black > total_white) {
-        loses += 1;
-        update(wins,loses,ties);
-        $('.banner').text('YOU  WIN!');
-        $('.banner').fadeIn("slow");
-    } else if (total_black < total_white) {
-        wins += 1;
-        update(wins,loses,ties);
-        $('.banner').text('YOU LOSE!');
-        $('.banner').fadeIn("slow");
-    } else {
-        ties += 1;
-        update(wins,loses,ties);
-        $('.banner').text('   TIE   ');
-        $('.banner').fadeIn("slow");
-    }
+    setTimeout(function(){    
+        if (total_black > total_white) {
+            loses += 1;
+            update(wins,loses,ties);
+            $('.banner').text('YOU  WIN!');
+            $('.banner').fadeIn("slow");
+        } else if (total_black < total_white) {
+            wins += 1;
+            update(wins,loses,ties);
+            $('.banner').text('YOU LOSE!');
+            $('.banner').fadeIn("slow");
+        } else {
+            ties += 1;
+            update(wins,loses,ties);
+            $('.banner').text('   TIE   ');
+            $('.banner').fadeIn("slow");
+        }
+        $('.btn.surrender').hide();
+        $('.btn.reload').show();
+    },100);
 }
 
 //update
@@ -1134,4 +1143,15 @@ function update(wins,loses,ties){
 //New Game
 function reload() {
     location.reload();
+}
+
+function surrender(){
+    init();
+    wins += 1;
+    update(wins,loses,ties);
+    $('.banner').text('YOU LOSE!');
+    $('.banner').fadeIn("slow");
+    $('.btn.surrender').hide();
+    $('.btn.reload').show();
+    $('#turn').hide();
 }

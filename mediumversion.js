@@ -86,6 +86,9 @@ function blackfirst() {
     $('.btn.bblack').hide();
     $('.btn.bwhite').hide();
     $('#choose').hide();
+    
+    $('.btn.reload').hide();
+    $('.btn.surrender').show();
 }
 
 //白棋(電腦)要先下
@@ -94,6 +97,9 @@ function whitefirst() {
     $('.btn.bblack').hide();
     $('.btn.bwhite').hide();
     $('#choose').hide();
+    
+    $('.btn.reload').hide();
+    $('.btn.surrender').show();
 }
 //initial end
 
@@ -785,23 +791,26 @@ function endgame() {
             }
         }
     }
-   
-    if (total_black > total_white) {
-        loses += 1;
-        update(wins,loses,ties);
-        $('.banner').text('YOU  WIN!');
-        $('.banner').fadeIn("slow");
-    } else if (total_black < total_white) {
-        wins += 1;
-        update(wins,loses,ties);
-        $('.banner').text('YOU LOSE!');
-        $('.banner').fadeIn("slow");
-    } else {
-        ties += 1;
-        update(wins,loses,ties);
-        $('.banner').text('   TIE   ');
-        $('.banner').fadeIn("slow");
-    }
+    setTimeout(function(){    
+        if (total_black > total_white) {
+            loses += 1;
+            update(wins,loses,ties);
+            $('.banner').text('YOU  WIN!');
+            $('.banner').fadeIn("slow");
+        } else if (total_black < total_white) {
+            wins += 1;
+            update(wins,loses,ties);
+            $('.banner').text('YOU LOSE!');
+            $('.banner').fadeIn("slow");
+        } else {
+            ties += 1;
+            update(wins,loses,ties);
+            $('.banner').text('   TIE   ');
+            $('.banner').fadeIn("slow");
+        }
+        $('.btn.surrender').hide();
+        $('.btn.reload').show();
+    },100);
 }
 
 //update
@@ -817,4 +826,15 @@ function update(wins,loses,ties){
 //new Game
 function reload() {
     location.reload();
+}
+
+function surrender(){
+    init();
+    wins += 1;
+    update(wins,loses,ties);
+    $('.banner').text('YOU LOSE!');
+    $('.banner').fadeIn("slow");
+    $('.btn.surrender').hide();
+    $('.btn.reload').show();
+    $('#turn').hide();
 }

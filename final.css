@@ -34,6 +34,12 @@ body{
     top : 290px;
     font-family: 'Fjalla One' ,serif;
 }
+.btn.surrender{
+    position: absolute;
+    left: -230px;
+    top: 290px;
+    font-family: 'Noto Serif TC', serif;
+}
 .btn{
     top: 210px;
     font-size: 28px;
